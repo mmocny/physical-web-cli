@@ -70,16 +70,18 @@ function advertise(urls) {
       .then((short_url) => {
         console.log(`Advertising and Watching: ${url} [short: ${short_url}]`);
         es_beacon.advertiseUrl(short_url, [options]);
+        /*
         setInterval(() => {
           goo_gl.analytics(short_url, { projection: "FULL" })
             .then((results) => {
               let last2 = results["twoHours"];
               let clicks = last2["shortUrlClicks"];
-              let browsers = last2["browsers"].map((vals) => `${vals.id}: ${vals.count}`).join(", ");
-              let platforms = last2["platforms"].map((vals) => `${vals.id}: ${vals.count}`).join(", ");
+              let browsers = (last2["browsers"] || []).map((vals) => `${vals.id}: ${vals.count}`).join(", ");
+              let platforms = (last2["platforms"] || []).map((vals) => `${vals.id}: ${vals.count}`).join(", ");
               console.log(`${url}: ${clicks} || ${browsers} || ${platforms}`);
             }).done();
         }, 2000);
+        */
       });
     })
   ).done();
