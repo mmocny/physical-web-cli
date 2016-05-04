@@ -1,0 +1,26 @@
+{
+  "name": "physical-web",
+  "version": "0.0.1",
+  "description": "CLI tool for various Physical Web tasks",
+  "main": "main.js",
+  "bin": {
+    "physical-web": "main.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "physical-web",
+    "Physical Web",
+    "PhysicalWeb"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "eddystone-beacon": "^1.0.6",
+    "eddystone-url-encoding": "^1.0.1",
+    "goo.gl": "^0.1.4",
+    "node-fetch": "^1.5.1",
+    "q": "^1.4.1"
+  }
+}
