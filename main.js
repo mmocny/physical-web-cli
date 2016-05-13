@@ -54,6 +54,7 @@ function advertise(urls) {
   const es_beacon = require('eddystone-beacon');
   const es_url_encode = require('eddystone-url-encoding').encode;
   const goo_gl = require('goo.gl');
+  const URL = require('url');
 
   const GOOGL_API_KEY = api_key("GOO.GL_KEY");
   goo_gl.setKey(GOOGL_API_KEY);
@@ -66,7 +67,8 @@ function advertise(urls) {
   };
 
   Q.all(urls.map((url) => {
-    return goo_gl.shorten(url)
+    let short_url_promise = (URL.parse(url).hostname == 'goo.gl') ? Q(url) : goo_gl.shorten(url);
+    return short_url_promise
       .then((short_url) => {
         console.log(`Advertising and Watching: ${url} [short: ${short_url}]`);
         es_beacon.advertiseUrl(short_url, [options]);
