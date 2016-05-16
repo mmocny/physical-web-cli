@@ -5,16 +5,29 @@
 /******************************************************************************/
 
 const fetch = require('node-fetch');
+const _ = require('lodash');
 const Q = require('q');
 
 /******************************************************************************/
 
-const PWS_SERVER = "https://physicalweb.googleapis.com/v1alpha1";
-const PWS_ENDPOINT = "urls:resolve";
+function GetConfig() {
+  const config = require('./config.json');
+  const config_private = require('./config.PRIVATE.json');
+  _.merge(config, config_private);
+  return config;
+}
 
-function api_key(which) {
-  let keys = require('./API_KEYS.json');
-  return keys[which];
+function GetConfigAt(/* path... */) {
+  const path = Array.prototype.slice.call(arguments);
+  let config = GetConfig();
+
+  for (let key of path) {
+    if (typeof config !== 'object')
+      throw new Error("Cannot find config value at: " + path.toString());
+    config = config[key];
+  }
+
+  return config;
 }
 
 /******************************************************************************/
@@ -22,19 +35,17 @@ function api_key(which) {
 function resolve(urls) {
   console.log('Resolve', urls);
 
-  const PWS_API_KEY = api_key("PWS_KEY");
-  const PWS_URL = `${PWS_SERVER}/${PWS_ENDPOINT}?key=${PWS_API_KEY}`
+  const pws_resolve_url = GetConfigAt("pws", "resolve", "url");
+  const pws_apikey = GetConfigAt("pws", "api-key");
+  const pws_url = `${pws_resolve_url}?key=${pws_apikey}`
 
   const body = JSON.stringify({
     urls: urls.map((url) => { return { url }; })
   });
 
-  fetch(PWS_URL, {
+  fetch(pws_url, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: GetConfigAt("pws", "resolve", "headers"),
     body
   }).then(function(response) {
     return response.json();
@@ -56,22 +67,15 @@ function advertise(urls) {
   const goo_gl = require('goo.gl');
   const URL = require('url');
 
-  const GOOGL_API_KEY = api_key("GOO.GL_KEY");
-  goo_gl.setKey(GOOGL_API_KEY);
-
-  let options = {
-    name: 'Physical Web Beacon',    // set device name when advertising (Linux only)
-    txPowerLevel: -22, // override TX Power Level, default value is -21,
-    //tlmCount: 2,       // 2 TLM frames
-    //tlmPeriod: 10      // every 10 advertisements
-  };
+  goo_gl.setKey(GetConfigAt("goo.gl", "api-key"));
 
   Q.all(urls.map((url) => {
     let short_url_promise = (URL.parse(url).hostname == 'goo.gl') ? Q(url) : goo_gl.shorten(url);
     return short_url_promise
       .then((short_url) => {
         console.log(`Advertising and Watching: ${url} [short: ${short_url}]`);
-        es_beacon.advertiseUrl(short_url, [options]);
+        es_beacon.advertiseUrl(short_url, [GetConfigAt("beacon", "options")]);
+
         /*
         setInterval(() => {
           goo_gl.analytics(short_url, { projection: "FULL" })
@@ -91,8 +95,12 @@ function advertise(urls) {
 
 /******************************************************************************/
 
+function help() {
+  console.log('No Help Available.');
+}
+
 function usage() {
-  console.log('Invalid command');
+  console.log('Invalid usage.');
 }
 
 /******************************************************************************/
@@ -106,7 +114,7 @@ function main() {
 
   switch (command) {
     case 'help':
-      return usage();
+      return help();
 
     case 'advertise':
     case 'a':

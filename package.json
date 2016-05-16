@@ -20,6 +20,7 @@
     "eddystone-beacon": "^1.0.6",
     "eddystone-url-encoding": "^1.0.1",
     "goo.gl": "^0.1.4",
+    "lodash": "^4.12.0",
     "node-fetch": "^1.5.1",
     "q": "^1.4.1"
   }

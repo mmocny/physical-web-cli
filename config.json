@@ -1,0 +1,21 @@
+{
+  "pws": {
+    "resolve": {
+      "url": "https://physicalweb.googleapis.com/v1alpha1/urls:resolve",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    }
+  },
+
+  "goo.gl": {
+  },
+
+  "beacon": {
+    "options": {
+      "name": "Physical Web Beacon",
+      "txPowerLevel": -21
+    }
+  }
+}

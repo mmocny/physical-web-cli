@@ -1,2 +1,3 @@
-API_KEYS.json
 node_modules/
+API_KEYS.json
+**/*.PRIVATE.*
