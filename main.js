@@ -73,7 +73,7 @@ function advertise(urls) {
     let short_url_promise = (URL.parse(url).hostname == 'goo.gl') ? Q(url) : goo_gl.shorten(url);
     return short_url_promise
       .then((short_url) => {
-        console.log(`Advertising and Watching: ${url} [short: ${short_url}]`);
+        console.log(`Advertising and Watching: ${url} [ short: ${short_url} ]`);
         es_beacon.advertiseUrl(short_url, [GetConfigAt("beacon", "options")]);
 
         /*
