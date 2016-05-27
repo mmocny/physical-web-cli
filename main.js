@@ -36,14 +36,11 @@ function resolve(urls) {
   console.log('Resolve', urls);
 
   const pws_resolve_url = GetConfigAt("pws", "resolve", "url");
-  const pws_apikey = GetConfigAt("pws", "api-key");
-  const pws_url = `${pws_resolve_url}?key=${pws_apikey}`
-
   const body = JSON.stringify({
     urls: urls.map((url) => { return { url }; })
   });
 
-  fetch(pws_url, {
+  fetch(pws_resolve_url, {
     method: 'POST',
     headers: GetConfigAt("pws", "resolve", "headers"),
     body
