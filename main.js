@@ -37,7 +37,8 @@ function resolve(urls) {
 
   const pws_resolve_url = GetConfigAt("pws", "resolve", "url");
   const body = JSON.stringify({
-    urls: urls.map((url) => { return { url }; })
+    urls: urls.map((url) => ({ url })),
+    options: { is_user_facing: false }
   });
 
   fetch(pws_resolve_url, {
