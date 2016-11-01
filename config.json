@@ -1,8 +1,8 @@
 {
   "pws": {
     "resolve": {
-      "url": "https://physicalweb.googleapis.com/v1alpha1/urls:resolve",
       "url": "https://test-physicalweb.sandbox.googleapis.com/v1alpha1/urls:resolve",
+      "url": "https://physicalweb.googleapis.com/v1alpha1/urls:resolve",
       "headers": {
         "Accept": "application/json",
         "Content-Type": "application/json"
