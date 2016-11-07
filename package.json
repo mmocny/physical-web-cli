@@ -22,6 +22,7 @@
     "goo.gl": "^0.1.4",
     "lodash": "^4.12.0",
     "node-fetch": "^1.5.1",
+    "physical-web-scan": "github:dermike/physical-web-scan",
     "q": "^1.4.1"
   }
 }

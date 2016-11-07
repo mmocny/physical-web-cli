@@ -56,6 +56,12 @@ function resolve(urls) {
 
 /******************************************************************************/
 
+function scan() {
+  require('physical-web-scan');
+}
+
+/******************************************************************************/
+
 function advertise(urls) {
   console.log('Advertise', urls);
   // TODO: try to resolve to make sure this works
@@ -105,8 +111,6 @@ function usage() {
 
 function main() {
   let args = process.argv.slice(2);
-  if (args.length == 0)
-    return usage();
 
   let command = args.shift();
 
@@ -116,16 +120,19 @@ function main() {
 
     case 'advertise':
     case 'a':
+    case 'broadcast':
+    case 'b':
     case 'share':
-    case 's':
       return advertise(args);
+
+    case 'scan':
+    case 's':
+    default:
+      return scan(args);
 
     case 'resolve':
     case 'r':
       return resolve(args);
-
-    default:
-      return usage();
   }
 }
 
