@@ -127,12 +127,14 @@ function main() {
 
     case 'scan':
     case 's':
-    default:
-      return scan(args);
+    case '':
 
     case 'resolve':
     case 'r':
       return resolve(args);
+
+    default:
+      return resolve([command]);
   }
 }
 
