@@ -22,22 +22,22 @@ function resolveAndExpect(url, expected) {
 /******************************************************************************/
 
 function main() {
-  Q.spawn(function*() {
+  Q.spawn(function * () {
     yield resolveAndExpect("https://www.google.com/", {
-    "results": [
-        {
-            "scannedUrl": "https://www.google.com/",
-            "resolvedUrl": "https://www.google.com/",
-            "pageInfo": {
-                "title": "Google",
-                "description": "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.",
-                "icon": "https://lh6.googleusercontent.com/proxy/hxv-69RTITGyZThmOiJBTI0y6zCyNL99X3Kr_J0qx3gQxXLDIEx19Yl98-ZX4Rf5e97O1RVSqWZNOQGCmT6AcTHWJHNGHC6044bTAi5DG8F9udLwFRI-0AWgWQ",
-                "groupId": "6464022343067968234"
-            },
-            "maxCacheDuration": "86400s"
-        }
-    ]
-});
+      "results" : [ {
+        "scannedUrl" : "https://www.google.com/",
+        "resolvedUrl" : "https://www.google.com/",
+        "pageInfo" : {
+          "title" : "Google",
+          "description" :
+              "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.",
+          "icon" :
+              "https://lh6.googleusercontent.com/proxy/hxv-69RTITGyZThmOiJBTI0y6zCyNL99X3Kr_J0qx3gQxXLDIEx19Yl98-ZX4Rf5e97O1RVSqWZNOQGCmT6AcTHWJHNGHC6044bTAi5DG8F9udLwFRI-0AWgWQ",
+          "groupId" : "6464022343067968234"
+        },
+        "maxCacheDuration" : "86400s"
+      } ]
+    });
   });
 }
 
