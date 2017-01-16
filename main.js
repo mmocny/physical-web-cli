@@ -7,6 +7,7 @@
 const fetch = require('node-fetch');
 const _ = require('lodash');
 const Q = require('q');
+const extend = require('extend');
 
 /******************************************************************************/
 
@@ -158,4 +159,13 @@ function main() {
 
 /******************************************************************************/
 
-main();
+if (require.main == module) {
+  main();
+}
+
+/******************************************************************************/
+
+extend(module.exports, {
+  advertise,
+  resolve
+});

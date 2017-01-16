@@ -1,9 +1,10 @@
+#!/usr/bin/python
+
 import re
 import subprocess
 import time
 
 resolve_command = "physical-web resolve "
-
 
 # match pattern "field": "value"
 def ExtractData(input_string, field):
@@ -42,10 +43,10 @@ def Test1():
   latency = end_time - start_time
 
   if (CheckOutput(expect_output, actual_output)):
-    print("Test1 passed, latency is %ds" % latency)
+    print("Test1 passed, latency is %ds, url: %s" % (latency,test_url) )
     return True
   else:
-    print("Test1 failed, latency is %ds" % latency)
+    print("Test1 failed, latency is %ds, url: %s"  % (latency,test_url))
     return False
 
 
@@ -71,10 +72,10 @@ def Test2():
   latency = end_time - start_time
 
   if (CheckOutput(expect_output, actual_output)):
-    print("Test2 passed, latency is %ds" % latency)
+    print("Test2 passed, latency is %ds, url: %s"  % (latency,test_url))
     return True
   else:
-    print("Test2 failed, latency is %ds" % latency)
+    print("Test2 failed, latency is %ds, url: %s"  % (latency,test_url))
     return False
 
 
@@ -99,10 +100,10 @@ def Test3():
   latency = end_time - start_time
 
   if (CheckOutput(expect_output, actual_output)):
-    print("Test3 passed, latency is %ds" % latency)
+    print("Test3 passed, latency is %ds, url: %s"  % (latency,test_url))
     return True
   else:
-    print("Test3 failed, latency is %ds" % latency)
+    print("Test3 failed, latency is %ds, url: %s"  % (latency,test_url))
     return False
 
 
@@ -130,10 +131,10 @@ def Test4():
   latency = end_time - start_time
 
   if (CheckOutput(expect_output, actual_output)):
-    print("Test4 passed, latency is %ds" % latency)
+    print("Test4 passed, latency is %ds, url: %s"  % (latency,test_url))
     return True
   else:
-    print("Test4 failed, latency is %ds" % latency)
+    print("Test4 failed, latency is %ds, url: %s"  % (latency,test_url))
     return False
 
 
@@ -153,10 +154,10 @@ def Test5():
   latency = end_time - start_time
 
   if (CheckOutput(expect_output, actual_output)):
-    print("Test5 passed, latency is %ds" % latency)
+    print("Test5 passed, latency is %ds, url: %s"  % (latency,test_url))
     return True
   else:
-    print("Test5 failed, latency is %ds" % latency)
+    print("Test5 failed, latency is %ds, url: %s"  % (latency,test_url))
     return False
 
 
