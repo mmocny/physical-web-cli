@@ -11,6 +11,26 @@ const pw = require('../main.js');
 
 /******************************************************************************/
 
+function compareValues(expected, actual) {
+  if (typeof expected === 'function')
+    return expected(actual);
+  return expected == actual;
+}
+
+/******************************************************************************/
+
+function RegEx(regex) {
+  return (actual) => (new RegExp(regex)).test(actual);
+}
+
+/******************************************************************************/
+
+function Prefix(prefix) {
+  return (actual) => actual.startsWith(prefix);
+}
+
+/******************************************************************************/
+
 function resolveAndExpect(url, expected) {
   return pw.resolve([url])
     .then(function(actual) {
@@ -31,11 +51,10 @@ function main() {
           "title" : "Google",
           "description" :
               "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.",
-          "icon" :
-              "https://lh6.googleusercontent.com/proxy/hxv-69RTITGyZThmOiJBTI0y6zCyNL99X3Kr_J0qx3gQxXLDIEx19Yl98-ZX4Rf5e97O1RVSqWZNOQGCmT6AcTHWJHNGHC6044bTAi5DG8F9udLwFRI-0AWgWQ",
-          "groupId" : "6464022343067968234"
+          "icon" : Prefix("https://lh6.googleusercontent.com/proxy/"),
+          "groupId" : RegEx(/[1234567890]*/),
         },
-        "maxCacheDuration" : "86400s"
+        "maxCacheDuration" : /.*/,
       } ]
     });
   });

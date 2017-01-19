@@ -127,10 +127,9 @@ function main() {
 
   let command = args.shift();
 
-  switch (command) {
-    case 'help':
-      return help();
+  if (!command) command = scan;
 
+  switch (command) {
     case 'advertise':
     case 'a':
     case 'broadcast':
@@ -141,6 +140,7 @@ function main() {
     case 'scan':
     case 's':
     case '':
+      return scan(args);
 
     case 'resolve':
     case 'r':
@@ -149,11 +149,9 @@ function main() {
           console.log(JSON.stringify(json, null, 4));
         });
 
+    case 'help':
     default:
-      return resolve([command])
-        .then(function(json) {
-          console.log(JSON.stringify(json, null, 4));
-        });
+      return help();
   }
 }
 
