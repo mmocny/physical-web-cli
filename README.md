@@ -9,20 +9,13 @@ npm install
 npm link # Optional: this will add `physical-web` command to globally
 ```
 
-Finally, you will need to create an `API_KEYS.json` file which looks like this:
-
-```
-{
-  "PWS_KEY":    "...",
-  "GOO.GL_KEY": "..."
-}
-```
+Finally, you will need to update `config.json` file to add various api keys.
 
 ### Usage
 
 #### Resolve URL(s) through PWS to test for correctness
 
-`physical-web resolve [URL...]`
+`physical-web resolve [URLs]`
 
 Alias: `r`
 
@@ -30,4 +23,11 @@ Alias: `r`
 
 `physical-web advertise [URL...]`
 
-Alias: `a`, `share`, `s`
+Alias: `a`, 'broadcast', 'b', `share`
+
+#### Scan for URL(s) locally using system BLE
+
+`physical-web [scan]`
+
+Default action with no arguments.
+Alias: `s`
