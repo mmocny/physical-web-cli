@@ -11,10 +11,11 @@ const extend = require('extend');
 
 /******************************************************************************/
 
+let config = null;
 function GetConfig() {
-  const config = require('./config.json');
-  const config_private = require('./config.PRIVATE.json');
-  _.merge(config, config_private);
+  if (!config) {
+    config = _.merge(require('./config.json'), require('./config.PRIVATE.json'));
+  }
   return config;
 }
 
@@ -126,6 +127,12 @@ function main() {
   let args = process.argv.slice(2);
 
   let command = args.shift();
+
+  if (command == '--test') {
+    let config = GetConfig();
+    config['pws'] = config['pws-test'];
+    command = args.shift();
+  }
 
   if (!command) command = scan;
 
