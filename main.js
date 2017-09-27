@@ -69,7 +69,7 @@ function advertise(urls) {
       console.log(JSON.stringify(json, null, 4));
 
       if (!('results' in json)) {
-        throw new Error('No resolved results to advertise');
+        console.warn('WARNING: URLs did not resolve in PWS.');
       }
     })
     .then(function() {
@@ -129,12 +129,19 @@ function main() {
   let command = args.shift();
 
   if (command == '--test') {
+    // Hack: since GetConfig() returns shared state, we can modify it globally
     let config = GetConfig();
     config['pws'] = config['pws-test'];
+
     command = args.shift();
   }
 
-  if (!command) command = scan;
+  if (command.startsWith('http')) {
+    args.unshift(command);
+    command = 'resolve';
+  } else if (!command) {
+    command = 'scan';
+  }
 
   switch (command) {
     case 'advertise':
@@ -146,7 +153,6 @@ function main() {
 
     case 'scan':
     case 's':
-    case '':
       return scan(args);
 
     case 'resolve':
