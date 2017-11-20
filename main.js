@@ -113,6 +113,11 @@ function advertise(urls) {
 
 /******************************************************************************/
 
+function looksLikeUrl(command) {
+  // None of the commands include dot
+  return command.includes('.');
+}
+
 function help() {
   console.log('No Help Available.');
 }
@@ -136,7 +141,7 @@ function main() {
     command = args.shift();
   }
 
-  if (command.startsWith('http')) {
+  if (looksLikeUrl(command)) {
     args.unshift(command);
     command = 'resolve';
   } else if (!command) {
